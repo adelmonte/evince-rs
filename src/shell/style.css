@@ -1,0 +1,58 @@
+#ev-loading-message {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+evview {
+  background-color: @theme_base_color;
+}
+
+.content-view evview, evview.content-view {
+  background-color: mix(@theme_bg_color, @theme_fg_color, 0.06);
+}
+
+.page-thumbnail {
+  background-color: white;
+  border: 1px solid alpha(black, 0.6);
+}
+
+.document-page {
+  background-color: white;
+  box-shadow: 0 1px 3px alpha(black, 0.35);
+}
+
+evpresentationview {
+  background-color: black;
+}
+
+.inline-toolbar {
+  border-bottom: 1px solid alpha(currentColor, 0.15);
+}
+
+.ev-message-area.error {
+  background-color: alpha(@error_color, 0.15);
+}
+
+.ev-message-area.warning {
+  background-color: alpha(@warning_color, 0.15);
+}
+
+.ev-message-area.info {
+  background-color: alpha(@theme_selected_bg_color, 0.12);
+}
+
+.ev-form-field {
+  background-color: white;
+  color: black;
+  border: 1px solid alpha(@theme_selected_bg_color, 0.8);
+}
+
+.sidebar stackswitcher button {
+  min-width: 0;
+  min-height: 0;
+  padding: 4px 6px;
+}
+
+.tnum {
+  font-feature-settings: "tnum";
+}

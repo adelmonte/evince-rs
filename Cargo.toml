@@ -1,0 +1,52 @@
+[package]
+name = "evince-rs"
+version = "0.1.0"
+edition = "2024"
+description = "Document viewer for multiple document formats (Rust port of Evince)"
+license = "GPL-2.0-or-later"
+default-run = "evince-rs"
+
+[lib]
+name = "evince_rs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "evince-rs"
+path = "src/bin/evince-rs.rs"
+
+[[bin]]
+name = "evince-rs-thumbnailer"
+path = "src/bin/evince-rs-thumbnailer.rs"
+
+[[bin]]
+name = "evince-rs-previewer"
+path = "src/bin/evince-rs-previewer.rs"
+
+[[bin]]
+name = "evince-rs-daemon"
+path = "src/bin/evince-rs-daemon.rs"
+
+[features]
+default = ["ps", "djvu", "xps"]
+ps = []
+djvu = []
+xps = []
+
+[dependencies]
+async-channel = "2.5.0"
+cairo-rs = { version = "0.18.5", features = ["png", "pdf", "ps"] }
+gdk = "0.18.2"
+gdk-pixbuf = "0.18.5"
+gio = "0.18.4"
+glib = { version = "0.18.5", features = ["v2_66"] }
+gtk = { version = "0.18.2", features = ["v3_24"] }
+libc = "0.2.191"
+pango = "0.18.3"
+pangocairo = "0.18.0"
+
+[build-dependencies]
+pkg-config = "0.3.34"
+
+[profile.release]
+lto = "thin"
+codegen-units = 4
