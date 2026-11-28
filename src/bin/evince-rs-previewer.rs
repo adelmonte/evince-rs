@@ -164,6 +164,7 @@ impl Previewer {
 }
 
 fn main() -> glib::ExitCode {
+    gdk::set_allowed_backends("wayland");
     let opts = match parse() {
         Ok(o) => o,
         Err(e) => {

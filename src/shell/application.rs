@@ -98,7 +98,6 @@ Application Options:
   -s, --presentation             Run evince-rs in presentation mode
   -w, --preview                  Run evince-rs as a previewer
   -l, --find=STRING              The word or phrase to find in the document
-  --display=DISPLAY              X display to use
 ";
 
 /// Parses the command line like GOptionContext would for evince's entries.
@@ -175,10 +174,6 @@ pub fn parse_args(args: &[String]) -> Result<Options, String> {
             "named-dest" => o.named_dest = Some(value(inline)?),
             "find" => o.find = Some(value(inline)?),
             "print-settings" => o.print_settings = Some(value(inline)?),
-            "display" => {
-                let d = value(inline)?;
-                unsafe { std::env::set_var("DISPLAY", d) };
-            }
             "version" => {
                 println!("evince-rs {}", env!("CARGO_PKG_VERSION"));
                 std::process::exit(0);
@@ -711,6 +706,7 @@ pub fn data_dirs(sub: &str) -> Vec<std::path::PathBuf> {
 
 /// Entry point used by the `evince-rs` binary.
 pub fn run() -> glib::ExitCode {
+    gdk::set_allowed_backends("wayland");
     let args: Vec<String> = std::env::args().collect();
     let opts = match parse_args(&args[1..]) {
         Ok(o) => o,
